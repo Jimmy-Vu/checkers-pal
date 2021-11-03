@@ -3,6 +3,12 @@ h1 {
   font-size: 48px;
 }
 
+.square {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+}
+
 .nav-bar {
   height: 95px;
   width: 100%;
@@ -10,15 +16,19 @@ h1 {
   border-radius: 5px;
 }
 
+.board {
+  margin-top: 40px;
+}
+
 .title {
   color: white;
   margin-left: 2rem;
 }
 
-.display-flex {
-  display: flex;
+.cream {
+  background-color: #efe6d0;
 }
 
-.align-center {
-  align-items: center;
+.black {
+  background-color: #000;
 }
