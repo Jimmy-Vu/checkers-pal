@@ -1,12 +1,14 @@
 import React from 'react';
 import Navbar from '../components/navbar';
-import Board from '../components/board';
+import Game from '../components/Game';
 
 export default function Home(props) {
   return (
     <div>
       <Navbar></Navbar>
-      <Board></Board>
+      <div className="display-flex justify-center">
+        <Game></Game>
+      </div>
     </div>
   );
 }

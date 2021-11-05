@@ -6,18 +6,23 @@ h1 {
 .square {
   width: 40px;
   height: 40px;
-  border: 1px solid black;
 }
 
 .nav-bar {
   height: 95px;
   width: 100%;
   background-color: #3f72af;
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .board {
   margin-top: 40px;
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: grid;
+  grid-template-columns: repeat(8, 40px);
 }
 
 .title {
@@ -31,4 +36,23 @@ h1 {
 
 .black {
   background-color: #000;
+  color: white;
+}
+
+.piece-white {
+  background-color: #f0f0f0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+}
+
+.piece-red {
+  background-color: #dc3030;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
 }
