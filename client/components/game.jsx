@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './board';
+import ColorModal from './color-modal';
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,13 @@ class Game extends React.Component {
   }
 
   render() {
-    return <Board></Board>;
+    return (
+      <div className="display-flex flex-column align-center">
+        <Board></Board>
+        <ColorModal></ColorModal>
+      </div>
+    );
+
   }
 }
 
