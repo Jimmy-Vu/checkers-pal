@@ -5,7 +5,8 @@ class PieceWhite extends React.Component {
     super(props);
     this.state = {
       isKing: false,
-      position: props.startId
+      position: props.startId,
+      isSelected: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -24,7 +25,8 @@ class PieceRed extends React.Component {
     super(props);
     this.state = {
       isKing: false,
-      position: props.startId
+      position: props.startId,
+      isSelected: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
