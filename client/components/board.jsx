@@ -6,8 +6,8 @@ class Board extends React.Component {
     super(props);
     this.state = {
       board: [],
-      startingPositionsRed: ['H1', 'H3', 'H5', 'H7', 'G2', 'G4', 'G6', 'G8', 'F1', 'F3', 'F5', 'F7'],
-      startingPositionsWhite: ['A2', 'A4', 'A6', 'A8', 'B1', 'B3', 'B5', 'B7', 'C2', 'C4', 'C6', 'C8']
+      positionsRed: ['H1', 'H3', 'H5', 'H7', 'G2', 'G4', 'G6', 'G8', 'F1', 'F3', 'F5', 'F7'],
+      positionsWhite: ['A2', 'A4', 'A6', 'A8', 'B1', 'B3', 'B5', 'B7', 'C2', 'C4', 'C6', 'C8']
     };
   }
 
@@ -22,11 +22,11 @@ class Board extends React.Component {
     for (let j = 0; j < xAxis.length; j++) {
       for (let i = 0; i < yAxis.length; i++) {
         if (j % 2 === 0) {
-          if ((this.state.startingPositionsRed.includes(`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed></PieceRed></span>);
+          if ((this.state.positionsRed.includes(`${xAxis[j]}${yAxis[i]}`))) {
+            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
             counter++;
-          } else if ((this.state.startingPositionsWhite.includes(`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite></PieceWhite></span>);
+          } else if ((this.state.positionsWhite.includes(`${xAxis[j]}${yAxis[i]}`))) {
+            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
             counter++;
           } else if (counter % 2 === 0) {
             this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
@@ -36,11 +36,11 @@ class Board extends React.Component {
             counter++;
           }
         } else {
-          if ((this.state.startingPositionsRed.includes(`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed></PieceRed></span>);
+          if ((this.state.positionsRed.includes(`${xAxis[j]}${yAxis[i]}`))) {
+            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
             counter++;
-          } else if ((this.state.startingPositionsWhite.includes(`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite></PieceWhite></span>);
+          } else if ((this.state.positionsWhite.includes(`${xAxis[j]}${yAxis[i]}`))) {
+            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
             counter++;
           } else if (counter % 2 !== 0) {
             this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);

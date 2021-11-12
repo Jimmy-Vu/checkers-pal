@@ -5,14 +5,17 @@ class PieceWhite extends React.Component {
     super(props);
     this.state = {
       isKing: false,
-      x: 2,
-      y: 1
+      position: props.startId
     };
-
+    this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
-    return <div className="piece-white"></div>;
+    return <div className="piece-white" onClick={this.handleClick}></div>;
+  }
+
+  handleClick(event) {
+    this.setState({ position: event.target.closest('.square').id });
   }
 }
 
@@ -21,13 +24,17 @@ class PieceRed extends React.Component {
     super(props);
     this.state = {
       isKing: false,
-      x: null,
-      y: null
+      position: props.startId
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
-    return <span className="piece-red"></span>;
+    return <span className="piece-red" onClick={this.handleClick}></span>;
+  }
+
+  handleClick(event) {
+    this.setState({ position: event.target.closest('.square').id });
   }
 }
 
