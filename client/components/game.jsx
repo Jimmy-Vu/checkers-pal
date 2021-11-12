@@ -14,7 +14,8 @@ class Game extends React.Component {
       p1SocketId: null,
       p2SocketId: null,
       p1Color: null,
-      p2Color: null
+      p2Color: null,
+      isCurrentTurn: false
     };
 
     socket.on('color-chosen', ({ color1, color2, p1SocketId }) => {
