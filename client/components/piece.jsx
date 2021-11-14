@@ -12,11 +12,18 @@ class PieceWhite extends React.Component {
   }
 
   render() {
-    return <div className="piece-white" onClick={this.handleClick}></div>;
+    return (this.state.isSelected
+      ? <div className="piece-white selected" onClick={this.handleClick}></div>
+      : <div className="piece-white" onClick={this.handleClick}></div>
+    );
   }
 
   handleClick(event) {
-    this.setState({ position: event.target.closest('.square').id });
+    this.setState({
+      position: event.target.closest('.square').id,
+      isSelected: true
+    });
+    console.log(this.props.positionsWhite);
   }
 }
 
@@ -32,11 +39,18 @@ class PieceRed extends React.Component {
   }
 
   render() {
-    return <span className="piece-red" onClick={this.handleClick}></span>;
+    return (this.state.isSelected
+      ? <div className="piece-red selected" onClick={this.handleClick}></div>
+      : <div className="piece-red" onClick={this.handleClick}></div>
+    );
   }
 
   handleClick(event) {
-    this.setState({ position: event.target.closest('.square').id });
+    this.setState({
+      position: event.target.closest('.square').id,
+      isSelected: true
+    });
+    console.log(this.props.positionsRed);
   }
 }
 
