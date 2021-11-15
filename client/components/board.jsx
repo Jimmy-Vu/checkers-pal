@@ -1,5 +1,6 @@
 import React from 'react';
 import { PieceWhite, PieceRed } from './piece';
+import { socket } from './game';
 
 class Board extends React.Component {
   constructor(props) {
@@ -17,6 +18,20 @@ class Board extends React.Component {
     };
 
     this.highlightLegalSquares = this.highlightLegalSquares.bind(this);
+
+    socket.on('piece-moved-red-server', redArray => {
+      this.setState({
+        positionsRed: redArray,
+        highlightedSquaresArray: []
+      });
+    });
+
+    socket.on('piece-moved-white-server', whiteArray => {
+      this.setState({
+        positionsWhite: whiteArray,
+        highlightedSquaresArray: []
+      });
+    });
   }
 
   render() {
@@ -29,8 +44,8 @@ class Board extends React.Component {
     let counter = 1;
     for (let j = 0; j < xAxis.length; j++) {
       for (let i = 0; i < yAxis.length; i++) {
-        if (highlightedSquaresArray.includes(`${xAxis[j]}${yAxis[i]}`)) {
-          board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square selected-square display-flex align-center justify-center"></span>);
+        if (highlightedSquaresArray.includes(`${xAxis[j]}${yAxis[i]}`, 2)) {
+          board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} onClick={event => this.moveToSquare(highlightedSquaresArray, event)} className="square selected-square display-flex align-center justify-center"></span>);
           counter++;
           continue;
         }
@@ -86,6 +101,39 @@ class Board extends React.Component {
     this.setState({
       highlightedSquaresArray: array
     });
+  }
+
+  moveToSquare(array, event) {
+    const color = array[1];
+    const originalSquare = array[0];
+    const destinationSquare = event.target.id;
+    let newArray = [];
+
+    if (color === 'red') {
+      newArray = this.state.positionsRed;
+      for (let i = 0; i < newArray.length; i++) {
+        if (originalSquare === newArray[i]) {
+          newArray.splice(i, 1, destinationSquare);
+          this.setState({
+            positionsRed: newArray,
+            highlightedSquaresArray: []
+          });
+          socket.emit('piece-moved-red', newArray);
+        }
+      }
+    } else {
+      newArray = this.state.positionsWhite;
+      for (let i = 0; i < newArray.length; i++) {
+        if (originalSquare === newArray[i]) {
+          newArray.splice(i, 1, destinationSquare);
+          this.setState({
+            positionsWhite: newArray,
+            highlightedSquaresArray: []
+          });
+          socket.emit('piece-moved-white', newArray);
+        }
+      }
+    }
   }
 }
 

@@ -31,6 +31,8 @@ class PieceWhite extends React.Component {
     // });
     let availableSquares = findAvailableSquares(currentPosition, 'white');
     availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
+    availableSquares.unshift('white');
+    availableSquares.unshift(currentPosition);
     highlightLegalSquares(availableSquares);
   }
 }
@@ -64,6 +66,8 @@ class PieceRed extends React.Component {
     // });
     let availableSquares = findAvailableSquares(currentPosition, 'red');
     availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
+    availableSquares.unshift('red');
+    availableSquares.unshift(currentPosition);
     highlightLegalSquares(availableSquares);
   }
 }
