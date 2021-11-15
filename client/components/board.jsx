@@ -5,9 +5,8 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [],
-      positionsRed: ['H1', 'H3', 'H5', 'H7', 'G2', 'G4', 'G6', 'G8', 'F1', 'F3', 'F5', 'F7', 'E6'],
-      positionsWhite: ['A2', 'A4', 'A6', 'A8', 'B1', 'B3', 'B5', 'B7', 'C2', 'C4', 'C6', 'C8', 'E8'],
+      positionsRed: ['H1', 'H3', 'H5', 'H7', 'G2', 'G4', 'G6', 'G8', 'F1', 'F3', 'F5', 'F7'],
+      positionsWhite: ['A2', 'A4', 'A6', 'A8', 'B1', 'B3', 'B5', 'B7', 'C2', 'C4', 'C6', 'C8'],
       blackSquares: ['A2', 'A4', 'A6', 'A8', 'B1', 'B3', 'B5', 'B7',
         'C2', 'C4', 'C6', 'C8', 'D1', 'D3', 'D5', 'D7', 'E2', 'E4', 'E6', 'E8',
         'H1', 'H3', 'H5', 'H7', 'G2', 'G4', 'G6', 'G8', 'F1', 'F3', 'F5', 'F7'],
@@ -21,54 +20,58 @@ class Board extends React.Component {
   }
 
   render() {
-    if (this.state.board.length !== 0) {
-      return <div className="board">{this.state.board}</div>;
-    }
+    const board = [];
     const positionsRed = this.state.positionsRed;
     const positionsWhite = this.state.positionsWhite;
+    const highlightedSquaresArray = this.state.highlightedSquaresArray;
     const yAxis = [1, 2, 3, 4, 5, 6, 7, 8];
     const xAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     let counter = 1;
     for (let j = 0; j < xAxis.length; j++) {
       for (let i = 0; i < yAxis.length; i++) {
+        if (highlightedSquaresArray.includes(`${xAxis[j]}${yAxis[i]}`)) {
+          board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square selected-square display-flex align-center justify-center"></span>);
+          counter++;
+          continue;
+        }
         if (j % 2 === 0) {
           if ((this.state.positionsRed.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.blackSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
             counter++;
           } else if ((this.state.positionsRed.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.whiteSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
             counter++;
           } else if ((this.state.positionsWhite.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.blackSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
             counter++;
           } else if ((this.state.positionsWhite.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.whiteSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
             counter++;
           } else if (counter % 2 === 0) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
             counter++;
           } else {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
             counter++;
           }
         } else {
           if ((this.state.positionsRed.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.blackSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
             counter++;
           } else if ((this.state.positionsRed.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.whiteSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceRed highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceRed></span>);
             counter++;
           } else if ((this.state.positionsWhite.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.blackSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
             counter++;
           } else if ((this.state.positionsWhite.includes(`${xAxis[j]}${yAxis[i]}`)) && this.state.whiteSquares.includes((`${xAxis[j]}${yAxis[i]}`))) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center"><PieceWhite highlightLegalSquares={this.highlightLegalSquares} positionsRed={positionsRed} positionsWhite={positionsWhite} startId={`${xAxis[j]}${yAxis[i]}`}></PieceWhite></span>);
             counter++;
           } else if (counter % 2 !== 0) {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square black display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
             counter++;
           } else {
-            this.state.board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
+            board.push(<span id={`${xAxis[j]}${yAxis[i]}`} key={`${xAxis[j]}${yAxis[i]}`} className="square cream display-flex align-center justify-center">{xAxis[j]}{yAxis[i]}</span>);
             counter++;
           }
         }
@@ -76,7 +79,7 @@ class Board extends React.Component {
     }
     counter = 0;
 
-    return <div className="board">{this.state.board}</div>;
+    return <div className="board">{board}</div>;
   }
 
   highlightLegalSquares(array) {

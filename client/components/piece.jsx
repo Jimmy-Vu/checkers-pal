@@ -1,6 +1,6 @@
 import React from 'react';
-import findAvailableSquares from './availableSquares';
-import legalSquaresCheck from './legalSquaresCheck';
+import findAvailableSquares from './handlers/availableSquares';
+import legalSquaresCheck from './handlers/legalSquaresCheck';
 
 class PieceWhite extends React.Component {
   constructor(props) {
@@ -26,9 +26,9 @@ class PieceWhite extends React.Component {
     const highlightLegalSquares = this.props.highlightLegalSquares;
 
     const currentPosition = event.target.closest('.square').id;
-    this.setState({
-      isSelected: true
-    });
+    // this.setState({
+    //   isSelected: true
+    // });
     let availableSquares = findAvailableSquares(currentPosition, 'white');
     availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
     highlightLegalSquares(availableSquares);
@@ -59,9 +59,9 @@ class PieceRed extends React.Component {
     const highlightLegalSquares = this.props.highlightLegalSquares;
 
     const currentPosition = event.target.closest('.square').id;
-    this.setState({
-      isSelected: true
-    });
+    // this.setState({
+    //   isSelected: true
+    // });
     let availableSquares = findAvailableSquares(currentPosition, 'red');
     availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
     highlightLegalSquares(availableSquares);
