@@ -1,4 +1,6 @@
 import React from 'react';
+import findAvailableSquares from './availableSquares';
+import legalSquaresCheck from './legalSquaresCheck';
 
 class PieceWhite extends React.Component {
   constructor(props) {
@@ -19,11 +21,17 @@ class PieceWhite extends React.Component {
   }
 
   handleClick(event) {
+    const positionsRed = this.props.positionsRed;
+    const positionsWhite = this.props.positionsWhite;
+    const highlightLegalSquares = this.props.highlightLegalSquares;
+
+    const currentPosition = event.target.closest('.square').id;
     this.setState({
-      position: event.target.closest('.square').id,
       isSelected: true
     });
-    console.log(this.props.positionsWhite);
+    let availableSquares = findAvailableSquares(currentPosition, 'white');
+    availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
+    highlightLegalSquares(availableSquares);
   }
 }
 
@@ -46,11 +54,17 @@ class PieceRed extends React.Component {
   }
 
   handleClick(event) {
+    const positionsRed = this.props.positionsRed;
+    const positionsWhite = this.props.positionsWhite;
+    const highlightLegalSquares = this.props.highlightLegalSquares;
+
+    const currentPosition = event.target.closest('.square').id;
     this.setState({
-      position: event.target.closest('.square').id,
       isSelected: true
     });
-    console.log(this.props.positionsRed);
+    let availableSquares = findAvailableSquares(currentPosition, 'red');
+    availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
+    highlightLegalSquares(availableSquares);
   }
 }
 
