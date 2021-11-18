@@ -26,9 +26,6 @@ class PieceWhite extends React.Component {
     const highlightLegalSquares = this.props.highlightLegalSquares;
 
     const currentPosition = event.target.closest('.square').id;
-    // this.setState({
-    //   isSelected: true
-    // });
     let availableSquares = findAvailableSquares(currentPosition, 'white');
     availableSquares = legalSquaresCheck(availableSquares, positionsRed, positionsWhite);
     availableSquares.unshift('white');
