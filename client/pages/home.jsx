@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/navbar';
-import Game from '../components/Game';
+import Game from '../components/game';
 
 export default function Home(props) {
   return (
