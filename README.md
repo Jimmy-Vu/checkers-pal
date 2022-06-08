@@ -7,7 +7,6 @@ Try the application live at [https://checkerspal.herokuapp.com/](https://checker
 
 ![checkers](https://user-images.githubusercontent.com/88172055/142513791-66b3cd33-98a9-448f-9dc0-fe0396b36c79.gif)
 
-
 #### Technologies Used
 * React JS
 * Node.js

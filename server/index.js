@@ -36,6 +36,18 @@ io.on('connection', socket => {
     }));
   });
 
+  socket.on('piece-moved-white', whiteArray => {
+    // eslint-disable-next-line no-console
+    console.log('A white piece has been moved');
+    io.emit('piece-moved-white-server', whiteArray);
+  });
+
+  socket.on('piece-moved-red', redArray => {
+    // eslint-disable-next-line no-console
+    console.log('A white piece has been moved');
+    io.emit('piece-moved-red-server', redArray);
+  });
+
   if (player1.socketId !== null) {
     player2.socketId = socket.id;
     // eslint-disable-next-line no-console
