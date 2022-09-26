@@ -20,7 +20,7 @@ Try the application live at [https://checkerspal.herokuapp.com/](https://checker
 #### Features
 - [x] 1. User can see the board and pieces
 - [x] 2. User can choose a color to play as
-- [ ] 3. User can move the pieces to legal squares
+- [x] 3. User can move the pieces to legal squares
 - [ ] 4. User can capture enemy pieces
 - [ ] 5. Users can upgrade their pieces to a king
 - [ ] 6. User can win the game
